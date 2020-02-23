@@ -5,9 +5,21 @@ MAINTAINER Pratik Daigavane
 #immediately dumped to the stream instead of being buffered.
 ENV PYTHONUNBUFFERED 1
 
+RUN set -e; \
+        apk add --no-cache --virtual .build-deps \
+                gcc \
+                libc-dev \
+                linux-headers \
+                mariadb-dev \
+                python3-dev \
+        ;
+
 # Install all dependencies
 COPY ./requirements.txt /requirements.txt
 RUN pip install -r requirements.txt
+
+RUN apk del .build-deps
+RUN apk add --no-cache mariadb-connector-c-dev
 
 # Copying app to docker and making it as working directory
 RUN mkdir /app
