@@ -1,16 +1,11 @@
 language: python
 python:
-  - "3.7"
+  - "3.6"
 
 services:
   - docker
 
-before_script:
-  - pip install docker-compose
+before_script: pip install docker-compose
 
 script:
-  - docker-compose up -d --build
   - docker-compose run --rm app sh -c "python manage.py test && flake8"
-
-after_script:
-  - docker-compose down
