@@ -5,7 +5,12 @@ python:
 services:
   - docker
 
-before_script: pip install docker-compose
+before_script:
+  - pip install docker-compose
+  - docker-compose up -d --build
 
 script:
   - docker-compose run --rm app sh -c "python manage.py test && flake8"
+
+after_script:
+  - docker-compose down
