@@ -26,6 +26,9 @@ RUN mkdir /app
 WORKDIR /app
 COPY ./app /app
 
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.2.1/wait /wait
+RUN chmod +x /wait
 # Creating a user and switching to it(for security)
 RUN adduser -D user
 USER user
+

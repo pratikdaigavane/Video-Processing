@@ -9,11 +9,13 @@ services:
     volumes:
       - ./app:/app
     command: >
-      sh -c "python manage.py wait_for_db &&
+      sh -c "/wait && python manage.py wait_for_db &&
              python manage.py migrate &&
              python manage.py runserver 0.0.0.0:8000"
     depends_on:
       - db
+    environment:
+      WAIT_HOSTS: db:3306
 
   db:
     image: mysql:8.0.19
