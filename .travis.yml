@@ -4,7 +4,6 @@ python:
 
 services:
   - docker
-  - mysql
 
 before_script: pip install docker-compose
 
