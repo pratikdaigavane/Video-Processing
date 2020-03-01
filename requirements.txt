@@ -5,3 +5,4 @@ flake8>=3.7.9,<3.8.0
 
 mysqlclient>=1.4.6,<1.5.0
 django-mysql>=3.3.0,<3.4.0
+celery>=4.4.0,<4.5.0

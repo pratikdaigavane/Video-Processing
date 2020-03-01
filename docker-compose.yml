@@ -1,7 +1,6 @@
 version: "3"
-
 services:
-  app:
+  app: &app
     build:
       context: .
     ports:
@@ -14,6 +13,8 @@ services:
              python manage.py runserver 0.0.0.0:8000"
     depends_on:
       - db
+      - rabbitmq
+      - celery_worker
     environment:
       WAIT_HOSTS: db:3306
 
@@ -26,7 +27,18 @@ services:
       - MYSQL_USER=root
       - MYSQL_PASSWORD=password
       - MYSQL_ROOT_PASSWORD=password
-    volumes:
-      - my-datavolume:/var/lib/mysql
-volumes:
-  my-datavolume:
+  
+  rabbitmq:
+    image: rabbitmq:alpine
+  # celery worker service
+  celery_worker:
+    <<: *app
+    command: celery -A app worker --loglevel=info
+    ports: []
+    depends_on: 
+      - rabbitmq
+      - db
+
+
+
+
