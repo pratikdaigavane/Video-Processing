@@ -17,7 +17,7 @@ RUN set -e; \
 # Install all dependencies
 COPY ./requirements.txt /requirements.txt
 RUN pip install -r requirements.txt
-
+RUN apk add ffmpeg
 RUN apk del .build-deps
 RUN apk add --no-cache mariadb-connector-c-dev
 
@@ -26,8 +26,10 @@ RUN mkdir /app
 WORKDIR /app
 COPY ./app /app
 
-
-# Creating a user and switching to it(for security)
+RUN mkdir -p /vol/web/media
+RUN mkdir -p /vol/web/static
 RUN adduser -D user
+RUN chown -R user:user /vol/
+RUN chmod -R 755 /vol/web
 USER user
 
