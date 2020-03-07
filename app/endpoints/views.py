@@ -1,10 +1,16 @@
-from core.models import VideoSubmission
-from .serializers import VideoSerializer
+import os
+import json
+from core.models import VideoSubmission, VideoChunk
+from .serializers import VideoSerializer, VideoChunkSerializer
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, exceptions
 from rest_framework import generics
 from rest_framework import mixins
 from .tasks import process_video
+from rest_framework.views import APIView
+from django.conf import settings
+import absoluteuri
+from uuid import UUID
 
 
 # Create your views here.
@@ -23,3 +29,19 @@ class VideoList(mixins.ListModelMixin,
             process_video.delay(obj.id)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class GetVideoChunk(generics.ListAPIView):
+    serializer_class = VideoChunkSerializer
+
+    def get_queryset(self):
+        pk = self.kwargs['pk']
+        try:
+            uuid_obj = UUID(pk, version=4)
+            try:
+                chunk = VideoChunk.objects.filter(VideoSubmission=pk)
+                return chunk
+            except VideoChunk.DoesNotExist:
+                raise exceptions.NotFound('Invalid Video ID')
+        except ValueError:
+            raise exceptions.NotFound('Invalid Video ID')

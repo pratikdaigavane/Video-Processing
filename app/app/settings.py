@@ -24,7 +24,7 @@ SECRET_KEY = 'p%mb0_g9aaylolh%szj*j#-x_jnbc3rni=^e9bb4$uc3_=fv^s'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.1.107']
 
 # Application definition
 
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'core',
+    'endpoints',
 ]
 
 MIDDLEWARE = [
@@ -120,3 +121,8 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = '/app/media'
 STATIC_ROOT = '/vol/web/static'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 100
+}
