@@ -1,5 +1,3 @@
-import os
-import json
 from core.models import VideoSubmission, VideoChunk
 from .serializers import VideoSerializer, VideoChunkSerializer
 from rest_framework.response import Response
@@ -7,9 +5,7 @@ from rest_framework import status, exceptions
 from rest_framework import generics
 from rest_framework import mixins
 from .tasks import process_video
-from rest_framework.views import APIView
-from django.conf import settings
-import absoluteuri
+
 from uuid import UUID
 
 
@@ -38,6 +34,7 @@ class GetVideoChunk(generics.ListAPIView):
         pk = self.kwargs['pk']
         try:
             uuid_obj = UUID(pk, version=4)
+            print(uuid_obj)
             try:
                 chunk = VideoChunk.objects.filter(VideoSubmission=pk)
                 return chunk

@@ -4,16 +4,23 @@ import os
 from django.core.exceptions import ValidationError
 from django.conf import settings
 
+
 def get_video_chunk_path(instance, filename):
     if (not instance.project_id) and (not instance.chunk_no):
         raise ValidationError('Invalid Project ID')
-    return os.path.join(instance.project_id + '/chunks/' + instance.chunk_no + '.mp4')
+    return os.path.join(instance.project_id +
+                        '/chunks/' +
+                        instance.chunk_no +
+                        '.mp4')
 
 
 def get_audio_chunk_path(instance, filename):
     if (not instance.project_id) and (not instance.chunk_no):
         raise ValidationError('Invalid Project ID')
-    return os.path.join(instance.project_id + '/chunks/' + instance.chunk_no + '.mp3')
+    return os.path.join(instance.project_id +
+                        '/chunks/' +
+                        instance.chunk_no +
+                        '.mp3')
 
 
 def create_with_pk(self):
@@ -74,7 +81,8 @@ class VideoSubmission(models.Model):
 
 class VideoChunk(models.Model):
     chunk_no = models.SmallIntegerField()
-    VideoSubmission = models.ForeignKey(VideoSubmission, on_delete=models.CASCADE)
+    VideoSubmission = models.ForeignKey(VideoSubmission,
+                                        on_delete=models.CASCADE)
     video_chunk = models.FileField()
     audio_chunk = models.FileField()
     start_time = models.TimeField()
