@@ -1,10 +1,12 @@
 from core.models import VideoSubmission, VideoChunk
-from .serializers import VideoSerializer, VideoChunkSerializer
+from .serializers import VideoSerializer, VideoChunkSerializer, ChangeAudioSerializer
 from rest_framework.response import Response
 from rest_framework import status, exceptions
 from rest_framework import generics
 from rest_framework import mixins
 from .tasks import process_video
+from rest_framework.views import APIView
+from django.http import Http404
 
 from uuid import UUID
 
@@ -42,3 +44,26 @@ class GetVideoChunk(generics.ListAPIView):
                 raise exceptions.NotFound('Invalid Video ID')
         except ValueError:
             raise exceptions.NotFound('Invalid Video ID')
+
+
+
+class ChangeAudio(APIView):
+    def get_object(self, pk, chunk_no):
+        try:
+            return VideoChunk.objects.get(VideoSubmission=pk, chunk_no=chunk_no)
+        except VideoChunk.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, chunk_no, format=None):
+        snippet = self.get_object(pk, chunk_no)
+        serializer = VideoChunkSerializer(snippet)
+        return Response(serializer.data)
+
+    def patch(self, request, pk, chunk_no):
+        snippet = self.get_object(pk, chunk_no)
+        serializer = ChangeAudioSerializer(snippet, data=request.data, partial=True)
+        print(serializer.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

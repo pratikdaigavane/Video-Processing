@@ -74,9 +74,10 @@ class VideoSubmission(models.Model):
                              validators=[validate_video])
     subtitle = models.FileField(upload_to=get_subtitle_path,
                                 validators=[validate_subtitle])
+    total_chunks = models.SmallIntegerField(default=0)
 
     def __str__(self):
-        return str(self.pk)
+        return str(self.project_name)
 
 
 class VideoChunk(models.Model):

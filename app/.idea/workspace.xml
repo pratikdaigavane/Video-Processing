@@ -2,15 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a247f26f-f3f9-4315-a625-eb855a2cbb3d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../.idea/dictionaries/pratik.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/endpoints/serializers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/endpoints/tasks.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/endpoints/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/migrations/0001_initial.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/endpoints/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/endpoints/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/endpoints/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/endpoints/tasks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/endpoints/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/endpoints/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/endpoints/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/endpoints/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,6 +72,7 @@
       <option name="presentableId" value="Default" />
       <updated>1583211600601</updated>
       <workItem from="1583211605067" duration="6497000" />
+      <workItem from="1584099292375" duration="5299000" />
     </task>
     <servers />
   </component>
@@ -84,9 +84,9 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="449" y="188" width="1022" height="737" key="SettingsEditor/0.27.1920.1053@0.27.1920.1053" timestamp="1583211631466" />
-    <state x="616" y="381" key="com.intellij.ide.util.TipDialog" timestamp="1583211611687">
+    <state x="616" y="381" key="com.intellij.ide.util.TipDialog" timestamp="1584099295642">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="616" y="381" key="com.intellij.ide.util.TipDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1583211611687" />
+    <state x="616" y="381" key="com.intellij.ide.util.TipDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1584099295642" />
   </component>
 </project>

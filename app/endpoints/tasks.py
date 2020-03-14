@@ -17,6 +17,7 @@ def process_video(video_id):
     f_audio = open('chunks/f_audio.txt', 'w+')
 
     subs = pysrt.open('subtitle.srt', encoding='iso-8859-1')
+    VideoSubmission.objects.filter(pk=video_id).update(total_chunks=len(subs))
 
     os.system('ffmpeg -i video.mp4 -c copy -an nosound.mp4')
     os.system('ffmpeg -i video.mp4 -vn music.mp3')
