@@ -1,11 +1,11 @@
 from core.models import VideoSubmission, VideoChunk
-from .serializers import VideoSerializer, VideoChunkSerializer, ChangeAudioSerializer
+from .serializers import VideoSerializer, \
+    VideoChunkSerializer, ChangeAudioSerializer
 from rest_framework.response import Response
 from rest_framework import status, exceptions
 from rest_framework import generics
 from rest_framework import mixins
-from .tasks import process_video
-from rest_framework.views import APIView
+from .tasks import process_video, change_audio
 from django.http import Http404
 
 from uuid import UUID
@@ -46,24 +46,22 @@ class GetVideoChunk(generics.ListAPIView):
             raise exceptions.NotFound('Invalid Video ID')
 
 
+class ChangeAudio(generics.RetrieveUpdateAPIView):
+    serializer_class = ChangeAudioSerializer
+    queryset = VideoChunk.objects.all()
 
-class ChangeAudio(APIView):
-    def get_object(self, pk, chunk_no):
+    def get_object(self):
         try:
-            return VideoChunk.objects.get(VideoSubmission=pk, chunk_no=chunk_no)
+            return VideoChunk.objects.get(VideoSubmission=self.kwargs['pk'],
+                                          chunk_no=self.kwargs['chunk_no'])
         except VideoChunk.DoesNotExist:
             raise Http404
 
-    def get(self, request, pk, chunk_no, format=None):
-        snippet = self.get_object(pk, chunk_no)
-        serializer = VideoChunkSerializer(snippet)
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.audio_chunk = request.data.get('audio_chunk')
+        instance.save()
+        serializer = ChangeAudioSerializer(instance)
+        print(instance.id)
+        change_audio.delay(instance.VideoSubmission.id, instance.chunk_no)
         return Response(serializer.data)
-
-    def patch(self, request, pk, chunk_no):
-        snippet = self.get_object(pk, chunk_no)
-        serializer = ChangeAudioSerializer(snippet, data=request.data, partial=True)
-        print(serializer.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -4,13 +4,11 @@
     <list default="true" id="a247f26f-f3f9-4315-a625-eb855a2cbb3d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/migrations/0001_initial.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/tasks.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/endpoints/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/endpoints/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/endpoints/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/endpoints/tasks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/endpoints/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/endpoints/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/endpoints/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/endpoints/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,9 +30,15 @@
     <option name="showMembers" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="app" type="Python.DjangoServer" factoryName="Django server">
@@ -73,6 +77,8 @@
       <updated>1583211600601</updated>
       <workItem from="1583211605067" duration="6497000" />
       <workItem from="1584099292375" duration="5299000" />
+      <workItem from="1584174844841" duration="11294000" />
+      <workItem from="1584207460488" duration="12557000" />
     </task>
     <servers />
   </component>
@@ -80,13 +86,17 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="693" y="302" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1584188757670">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="693" y="302" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1584188757670" />
     <state x="449" y="188" width="1022" height="737" key="SettingsEditor" timestamp="1583211631466">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="449" y="188" width="1022" height="737" key="SettingsEditor/0.27.1920.1053@0.27.1920.1053" timestamp="1583211631466" />
-    <state x="616" y="381" key="com.intellij.ide.util.TipDialog" timestamp="1584099295642">
+    <state x="616" y="381" key="com.intellij.ide.util.TipDialog" timestamp="1584207464409">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="616" y="381" key="com.intellij.ide.util.TipDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1584099295642" />
+    <state x="616" y="381" key="com.intellij.ide.util.TipDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1584207464409" />
   </component>
 </project>

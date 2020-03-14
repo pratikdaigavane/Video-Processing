@@ -5,7 +5,8 @@ from core.models import VideoSubmission, VideoChunk
 class VideoSerializer(serializers.ModelSerializer):
     class Meta:
         model = VideoSubmission
-        fields = ['id', 'status', 'project_name', 'video', 'subtitle', 'total_chunks']
+        fields = ['id', 'status', 'project_name',
+                  'video', 'subtitle', 'total_chunks']
         read_only_fields = ['id', 'status', 'total_chunks']
 
 
@@ -26,7 +27,7 @@ class VideoChunkSerializer(serializers.ModelSerializer):
         model = VideoChunk
         fields = ['chunk_no',
                   'video_chunk',
-                  
+
                   'audio_chunk',
                   'start_time',
                   'end_time',
