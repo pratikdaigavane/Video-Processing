@@ -1,8 +1,17 @@
 import React from 'react'
-import {Typography} from "@material-ui/core";
+import {Container, Typography} from "@material-ui/core";
 
-import './new-project.component.css'
 import axios from 'axios';
+import FormControl from "@material-ui/core/FormControl";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button"
+import 'react-dropzone-uploader/dist/styles.css'
+import Dropzone from 'react-dropzone-uploader'
+import Snackbar from "@material-ui/core/Snackbar";
+import Alert from "@material-ui/lab/Alert";
+import './new-project.component.css'
+import {withRouter} from 'react-router-dom'
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 class NewProject extends React.Component {
     constructor(props) {
@@ -10,12 +19,47 @@ class NewProject extends React.Component {
         this.state = {
             projectName: '',
             videoFile: null,
-            subtitleFile: null
+            subtitleFile: null,
+            open: false,
+            redirect: false,
+            disabled: false,
+            project_id: ''
+
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleUploadSubmit = this.handleUploadSubmit.bind(this);
+        this.handleChangeStatus = this.handleChangeStatus.bind(this);
+        this.getUploadParams = this.getUploadParams.bind(this);
+        this.closeAlert = this.closeAlert.bind(this);
+
+
+    };
+
+    getUploadParams({meta}) {
+        return 1
+    };
+
+
+    closeAlert() {
+        this.setState({open: false});
+        this.props.history.push(`/dashboard?id=${this.state.project_id}`)
+
     }
+
+
+    handleChangeStatus({meta, file}, status) {
+        if (file.type === 'video/mp4') {
+            this.setState({videoFile: file})
+        } else {
+            this.setState({subtitleFile: file})
+        }
+    };
+
+    handleUploadSubmit(files) {
+        console.log(files.map(f => f.meta))
+    };
 
     handleChange(event) {
         console.log(event.target.id);
@@ -40,52 +84,74 @@ class NewProject extends React.Component {
     }
 
     handleSubmit(event) {
-        const data = new FormData()
+        this.setState({disabled: true});
+        event.preventDefault();
+        const data = new FormData();
         data.append('project_name', this.state.projectName);
         data.append('video', this.state.videoFile);
         data.append('subtitle', this.state.subtitleFile);
-        axios.post("http://127.0.0.1:8000/api/video/", data, {
-            // receive two    parameter endpoint url ,form data
-        }).then(res => console.log(res.data))
-
-        alert('A name was submitted: ' + this.state.projectName);
-        event.preventDefault();
+        axios.post(`${process.env.REACT_APP_API_URL}/api/video/`, data,)
+            .then(res => this.setState({project_id: res.data.id}));
+        this.setState({open: true});
     }
 
     render() {
         return (
             <div className="new-project">
-                <Typography variant="h2" component="h2">
+                {
+                    this.state.disabled ?
+                        <LinearProgress color="secondary"/> :
+                        null
+                }
+
+                <Typography variant="h3" component="h3" className="heading">
                     New Project
                 </Typography>
-                {/*<form onSubmit={this.handleSubmit}>*/}
-                {/*    <Container maxWidth="sm">*/}
-                {/*        <label>*/}
-                {/*            Name:*/}
-                {/*            <input id="projectName" type="text" value={this.state.projectName}*/}
-                {/*                   onChange={this.handleChange}/>*/}
-                {/*        </label>*/}
-                {/*        <label>*/}
-                {/*            Video File*/}
-                {/*            <input id="videoFile" type="file" onChange={this.handleChange}/>*/}
-                {/*        </label> <label>*/}
-                {/*        Subtitle File*/}
-                {/*        <input id="subtitleFile" type="file" onChange={this.handleChange}/>*/}
-                {/*    </label>*/}
-                {/*        <input type="submit" value="Submit"/>*/}
-                {/*        <Button*/}
-                {/*            variant="contained"*/}
-                {/*            component="label"*/}
-                {/*        >*/}
-                {/*            Upload File*/}
-                {/*            <input*/}
-                {/*                type="file"*/}
-                {/*                style={{ display: "none" }}*/}
-                {/*            />*/}
-                {/*        </Button>*/}
-                {/*    </Container>*/}
-                {/*</form>*/}
 
+                <Container className={"uploadForm"}>
+                    <FormControl color={"secondary"} fullWidth>
+                        <TextField id="projectName" label="Project Name" variant="outlined"
+                                   onChange={this.handleChange}/>
+                        <h1>Video File</h1>
+                        <Dropzone
+                            className="fileUploader"
+                            onChangeStatus={this.handleChangeStatus}
+                            accept="video/mp4"
+                            multiple={false}
+                            autoUpload={false}
+                            maxFiles={1}
+                            inputContent="Drag Video or Click to Browse"
+                        />
+                        <h1>Subtitle File</h1>
+                        <Dropzone
+                            onChangeStatus={this.handleChangeStatus}
+                            accept=".srt"
+                            multiple={false}
+                            autoUpload={false}
+                            maxFiles={1}
+                            inputContent="Drag Subtitle or Click to Browse"
+
+                        />
+                    </FormControl>
+                    <br/><br/><br/>
+                    <Button disabled={this.state.disabled}
+                            variant="contained"
+                            color="primary"
+                            onClick={this.handleSubmit}
+                            size='large'
+                    >
+                        Submit
+                    </Button>
+                </Container>
+
+                <Snackbar open={this.state.open} autoHideDuration={2000} onClose={this.closeAlert}
+
+
+                >
+                    <Alert severity="success">
+                        Files Uploaded Successfully
+                    </Alert>
+                </Snackbar>
 
             </div>
         );
@@ -93,4 +159,4 @@ class NewProject extends React.Component {
 
 }
 
-export default NewProject
+export default withRouter(NewProject)

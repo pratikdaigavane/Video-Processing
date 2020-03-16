@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Card, CardActions, CardContent, Typography} from "@material-ui/core";
+import {Button, Card, CardActions, CardContent, Container, Typography} from "@material-ui/core";
 import './my-projects.component.css'
 import axios from 'axios'
 import VideoPlayer from "../video-player/video-player.component";
@@ -21,7 +21,7 @@ class MyProjects extends React.Component {
                 console.log(res.data)
                 this.setState({
                     count: res.data.count,
-                    videoList: res.data.results
+                    videoList: res.data.results.reverse()
                 })
             })
             .catch(() => alert('server offline'))
@@ -37,13 +37,13 @@ class MyProjects extends React.Component {
                     My Projects
                 </Typography>
                 <br/><br/>
-                <div id="videoCard">
+                <Container id="videoCard">
                     {
                         this.state.videoList.map((singleVideo) => {
                             const videoJsOptions = {
                                 autoplay: false,
                                 controls: true,
-                                preload: 'none',
+                                preload: 'metadata',
                                 sources: [{
                                     src: singleVideo.video,
                                     type: 'video/mp4'
@@ -63,7 +63,7 @@ class MyProjects extends React.Component {
                                         </CardContent>
                                         <div className="controls">
                                             <CardActions>
-                                                <Link to={`/dashboard?id=${singleVideo.id}&&projectName=${singleVideo.project_name}&&totalChunks=${singleVideo.total_chunks}`
+                                                <Link to={`/dashboard?id=${singleVideo.id}`
 
 
                                                 }
@@ -83,7 +83,7 @@ class MyProjects extends React.Component {
                         })
 
                     }
-                </div>
+                </Container>
 
             </div>
         );

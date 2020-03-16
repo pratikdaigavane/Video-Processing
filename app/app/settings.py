@@ -24,7 +24,7 @@ SECRET_KEY = 'p%mb0_g9aaylolh%szj*j#-x_jnbc3rni=^e9bb4$uc3_=fv^s'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '192.168.1.107']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -78,11 +78,16 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'app',
+        'USER': 'root',
+        'PASSWORD': 'password',
+        'HOST': 'db',
+        'PORT': 3306,
     }
 }
-
+# RabbitMQ will act as message broker for celery
+# AMQP Messaging protocol is used
 CELERY_BROKER_URL = "amqp://rabbitmq"
 
 # Password validation
@@ -118,16 +123,19 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = '/app/media'
-STATIC_ROOT = '/vol/web/static'
+# Directory where static files are stored
+MEDIA_ROOT = '/app/media/'
+STATIC_ROOT = ''
 
+# Django Rest Framework Configuration
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 100
+    'PAGE_SIZE': 200
 }
+
+# Allow Cross-origin resource sharing
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True

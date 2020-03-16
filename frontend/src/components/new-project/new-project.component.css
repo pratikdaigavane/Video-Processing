@@ -1,2 +1,13 @@
-.new-project{
+.new-project {
+    margin-top: 50px;
+    margin-left: 30px;
+}
+
+.uploadForm {
+    margin-top: 50px;
+    width: 50%;
+}
+
+.dzu-dropzone {
+    overflow: hidden;
 }

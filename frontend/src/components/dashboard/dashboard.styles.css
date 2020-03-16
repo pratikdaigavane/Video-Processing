@@ -1,10 +1,9 @@
-.dashboard{
+.dashboard {
     padding: 10px;
 }
+
 .root {
-    display: flex;
-    margin: 10px;
-    width: 70%;
+    width: 80%;
 }
 
 .details {
@@ -14,15 +13,38 @@
 
 .content {
     flex: 1 0 auto;
+    width: 70%;
 }
 
 .cover {
     width: 46%;
 }
-#videoCard{
+
+#videoCard {
     overflow-y: scroll;
-    overflow-x: hidden ;
-    height: 80vh;
+    overflow-x: hidden;
+    height: 69vh;
 }
 
+.chunkInfo {
+    background-color: #e0e0e0;
+}
 
+.fileUploader {
+    width: 500px
+}
+
+.projectId{
+    font-size: large;
+}
+.processing{
+    font-family: monospace;
+    font-size: xx-large ;
+    color: orange;
+}
+.done{
+    font-family: monospace;
+    font-size: xx-large;
+    color: green;
+
+}

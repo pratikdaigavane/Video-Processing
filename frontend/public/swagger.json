@@ -1,0 +1,307 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "API Documentaion for Video Processing Applicaton",
+    "version" : "1.0.0",
+    "title" : "Video Processing Applicaton",
+    "contact" : {
+      "name" : "Pratik Daigavane",
+      "email" : "daigavanep@gmail.com"
+    }
+  },
+  "host" : "localhost:8000",
+  "basePath" : "/api",
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/video/" : {
+      "get" : {
+        "summary" : "List all Video Tutorials",
+        "description" : "This endpoint will return all the video tutorials uploaded earlier on \nthe server\n",
+        "operationId" : "listAllVideo",
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "result listing all the videos",
+            "schema" : {
+              "$ref" : "#/definitions/inline_response_200"
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Upload a new Video Tutorial",
+        "description" : "Adds an item to the system",
+        "operationId" : "uploadVideo",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "inventoryItem",
+          "description" : "Inventory item to add",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/VideoSubmissionCreate"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Tutorial Uploaded",
+            "schema" : {
+              "$ref" : "#/definitions/VideoSubmission"
+            }
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          }
+        }
+      }
+    },
+    "/video/{videoId}" : {
+      "get" : {
+        "summary" : "get all chunks of a particular video",
+        "description" : "This endpoint will all the chunks created for a particular video tutorial \n",
+        "operationId" : "getVideoInfo",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "videoId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "format" : "uuid"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "result listing all the videos",
+            "schema" : {
+              "$ref" : "#/definitions/inline_response_200_1"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/video/{videoID}/{chunkNo}" : {
+      "get" : {
+        "summary" : "get information about particular chunk of a video",
+        "description" : "This endpoint return information about particular chunk of a video \n",
+        "operationId" : "getSingleChunk",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "videoID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "format" : "uuid"
+        }, {
+          "name" : "chunkNo",
+          "in" : "path",
+          "required" : true,
+          "type" : "number"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "result listing information of a particular chunk",
+            "schema" : {
+              "$ref" : "#/definitions/VideoChunk"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          }
+        }
+      },
+      "put" : {
+        "summary" : "change audio of a particular chunk",
+        "operationId" : "changeAudio",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "videoID",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "format" : "uuid"
+        }, {
+          "name" : "chunkNo",
+          "in" : "path",
+          "required" : true,
+          "type" : "number"
+        }, {
+          "in" : "body",
+          "name" : "Audio File",
+          "description" : "Upload new audio",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Audio File"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "result listing information of a particular chunk",
+            "schema" : {
+              "$ref" : "#/definitions/VideoChunk"
+            }
+          },
+          "400" : {
+            "description" : "bad request"
+          },
+          "404" : {
+            "description" : "not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "VideoSubmission" : {
+      "type" : "object",
+      "required" : [ "id", "project_name", "subtitle", "video" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "format" : "uuid",
+          "example" : "2e58b1fc-c501-46c7-9ca5-2031409cc5a8"
+        },
+        "project_name" : {
+          "type" : "string",
+          "example" : "Example Tutorial"
+        },
+        "status" : {
+          "type" : "array",
+          "example" : "done",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "video" : {
+          "type" : "string",
+          "format" : "uri",
+          "example" : "http://127.0.0.1:8000/media/2e58b1fc-c501-46c7-9ca5-2031409cc5a8/video.mp4"
+        },
+        "subtitle" : {
+          "type" : "string",
+          "format" : "uri",
+          "example" : "http://127.0.0.1:8000/media/2e58b1fc-c501-46c7-9ca5-2031409cc5a8/subtitle.srt"
+        },
+        "total_chunks" : {
+          "type" : "number",
+          "example" : 30.0
+        },
+        "processed_video" : {
+          "type" : "string",
+          "format" : "uri",
+          "example" : "http://127.0.0.1:8000/media/2e58b1fc-c501-46c7-9ca5-2031409cc5a8/processed_video.mp4"
+        }
+      }
+    },
+    "VideoSubmissionCreate" : {
+      "type" : "object",
+      "required" : [ "project_name", "subtitle", "video" ],
+      "properties" : {
+        "project_name" : {
+          "type" : "string",
+          "example" : "Example Tutorial"
+        },
+        "video" : {
+          "type" : "string",
+          "format" : "binary",
+          "example" : "video.mp4"
+        },
+        "subtitle" : {
+          "type" : "string",
+          "format" : "binary",
+          "example" : "subtitle.srt"
+        }
+      }
+    },
+    "VideoChunk" : {
+      "required" : [ "audio_chunk", "chunk_no", "end_time", "start_time", "subtitle", "video_chunk" ],
+      "properties" : {
+        "chunk_no" : {
+          "type" : "number",
+          "example" : 5.0
+        },
+        "video_chunk" : {
+          "type" : "string",
+          "format" : "uri",
+          "example" : "http://127.0.0.1:8000/media/2e58b1fc-c501-46c7-9ca5-2031409cc5a8/chunks/5.mp4"
+        },
+        "audio_chunk" : {
+          "type" : "string",
+          "format" : "uri",
+          "example" : "http://127.0.0.1:8000/media/2e58b1fc-c501-46c7-9ca5-2031409cc5a8/chunks/5.mp3"
+        },
+        "start_time" : {
+          "type" : "string",
+          "format" : "time",
+          "example" : "00:00:09.350000"
+        },
+        "end_time" : {
+          "type" : "string",
+          "format" : "time",
+          "example" : "00:00:11.350000"
+        },
+        "subtitle" : {
+          "type" : "string",
+          "example" : "this is a sample subtitle"
+        }
+      }
+    },
+    "inline_response_200" : {
+      "type" : "object",
+      "properties" : {
+        "count" : {
+          "type" : "integer",
+          "example" : 1
+        },
+        "next" : {
+          "type" : "integer"
+        },
+        "previous" : {
+          "type" : "integer"
+        },
+        "results" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/VideoSubmission"
+          }
+        }
+      }
+    },
+    "inline_response_200_1" : {
+      "type" : "object",
+      "properties" : {
+        "video_data" : {
+          "$ref" : "#/definitions/VideoSubmission"
+        },
+        "chunks" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/VideoChunk"
+          }
+        }
+      }
+    },
+    "Audio File" : {
+      "type" : "object",
+      "properties" : {
+        "audio_file" : {
+          "type" : "string",
+          "format" : "binary",
+          "example" : "new_audio.mp3"
+        }
+      }
+    }
+  }
+}

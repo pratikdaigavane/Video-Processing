@@ -1,14 +1,21 @@
 from __future__ import absolute_import, unicode_literals
-from celery import shared_task
+
 import os
+import pickle
+import time
+
+import pysrt
+from celery import shared_task
 from core.models import VideoSubmission, VideoChunk
 from django.conf import settings
-import pysrt
-import pickle
 
 
 @shared_task
 def process_video(video_id):
+    """
+    this function will break the uploaded video into
+    chunks and will store audio separately
+    """
     folder_path = os.path.join(settings.MEDIA_ROOT, video_id)
     os.chdir(folder_path)
     chunk_directory = os.path.join(folder_path, 'chunks')
@@ -33,7 +40,6 @@ def process_video(video_id):
                 "ffmpeg  -i nosound.mp4 -ss 00:00:00.000 " +
                 " -to " + start_time +
                 " -async 1 " + nos_video_file_name)
-            print(str(i) + " => " + command, flush=True)
             os.system(command)
             command = str(
                 "ffmpeg  -i music.mp3 -ss 00:00:00.000 " +
@@ -48,7 +54,6 @@ def process_video(video_id):
         command = str("ffmpeg -i nosound.mp4 -ss "
                       + start_time +
                       " -to " + end_time + " -async 1 " + video_file_name)
-        print(str(i) + " => " + command, flush=True)
 
         os.system(command)
         command = str("ffmpeg -i music.mp3 -ss "
@@ -76,7 +81,6 @@ def process_video(video_id):
                               " -to " + nos_end_time +
                               " -async 1 " +
                               nos_video_file_name)
-                print(str(i) + " => " + command, flush=True)
 
                 os.system(command)
                 command = str("ffmpeg -i music.mp3 -ss "
@@ -91,15 +95,12 @@ def process_video(video_id):
                 "ffmpeg  -i nosound.mp4" +
                 " -ss " + end_time +
                 " -async 1 " + nos_video_file_name)
-            print(str(i) + " => " + command, flush=True)
             os.system(command)
             command = str(
                 "ffmpeg  -i music.mp3 -ss " + end_time +
                 " -c copy " + nos_audio_file_name)
             os.system(command)
             chunk_filename.append('h_' + str(i))
-
-        print("-----------------------")
 
     with open("chunks/filenames.txt", "wb") as fp:  # Pickling
         pickle.dump(chunk_filename, fp)
@@ -109,6 +110,7 @@ def process_video(video_id):
 
 @shared_task()
 def change_all_audio(video_id):
+    """this func will join audio and video of all chunks"""
     folder_path = os.path.join(settings.MEDIA_ROOT, video_id)
     chunk_directory = os.path.join(folder_path, 'chunks')
     os.chdir(chunk_directory)
@@ -116,7 +118,6 @@ def change_all_audio(video_id):
 
     with open("filenames.txt", "rb") as fp:  # Unpickling
         filenames = pickle.load(fp)
-    print(filenames)
     for file in filenames:
         command = 'ffmpeg -y -i ' + \
                   file + '.mp4 -i ' + \
@@ -132,6 +133,7 @@ def change_all_audio(video_id):
 
 @shared_task()
 def change_audio(video_id, chunk_no):
+    """this func will join audio and video of specified chunk"""
     VideoSubmission.objects.filter(pk=video_id).update(status='in_queue')
     chunk_no = str(chunk_no)
     folder_path = os.path.join(settings.MEDIA_ROOT, video_id)
@@ -147,10 +149,15 @@ def change_audio(video_id, chunk_no):
 
 @shared_task()
 def compile_all_chunks(video_id):
+    """Combine all the chunks and return a processed video"""
     folder_path = os.path.join(settings.MEDIA_ROOT, video_id)
     chunk_directory = os.path.join(folder_path, 'chunks')
     os.chdir(chunk_directory)
+    filename = 'processed_video' + str(time.strftime("%Y%m%d-%H%M%S") + '.mp4')
     command = 'ffmpeg -y -f concat -safe 0 -i ' \
-              'compiled_video_list.txt -c copy fully_final.mp4'
+              'compiled_video_list.txt -c copy ' + filename
+
     os.system(command)
-    VideoSubmission.objects.filter(pk=video_id).update(status='done')
+    file_path = os.path.join(video_id, 'chunks', filename)
+    VideoSubmission.objects.filter(pk=video_id). \
+        update(status='done', processed_video=file_path)

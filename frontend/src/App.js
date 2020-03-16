@@ -5,6 +5,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Home from "./components/home/home.component";
 import Dashboard from "./components/dashboard/dashboard.component";
 import {Route, Switch} from 'react-router-dom';
+import Documentation from "./components/documentation/documentation.component";
 
 import './App.css'
 class App extends React.Component {
@@ -25,6 +26,8 @@ class App extends React.Component {
 
                     <Route exact path='/' component={Home}/>
                     <Route path='/dashboard' component={Dashboard}/>
+                    <Route path='/doc' component={Documentation}/>
+
                     </Switch>
 
                 {/*<VideoPlayer {...videoJsOptions} />*/}

@@ -1,5 +1,8 @@
+#this file binds together all the services of the platform
+#a simple 'docker-compose up' will start everything!
 version: "3"
 services:
+  # Django APP
   app: &app
     build:
       context: .
@@ -9,6 +12,7 @@ services:
       - ./app:/app
     command: >
       sh -c "python manage.py wait_for_db &&
+             python manage.py makemigrations core &&
              python manage.py migrate &&
              python manage.py runserver 0.0.0.0:8000"
     depends_on:
@@ -18,26 +22,33 @@ services:
     environment:
       WAIT_HOSTS: db:3306
 
+  # MySQL Database
   db:
     image: mysql:8.0.19
     ports:
       - "3306:3306"
     environment:
       - MYSQL_DATABASE=app
-      - MYSQL_USER=root
       - MYSQL_PASSWORD=password
       - MYSQL_ROOT_PASSWORD=password
-  
+
+  # Messaging Broker
   rabbitmq:
     image: rabbitmq:alpine
-  # celery worker service
+
+  #  Distributed Task Queue to achieve asynchronous behaviour
   celery_worker:
     <<: *app
-    command: celery -A app worker --loglevel=info
+    command: "celery -A app worker --loglevel=info"
     ports: []
-    depends_on: 
+    depends_on:
       - rabbitmq
       - db
+
+  frontend:
+    image: flameslayer/frontend
+    ports:
+    - "80:80"
 
 
 

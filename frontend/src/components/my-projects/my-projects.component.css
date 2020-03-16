@@ -1,9 +1,11 @@
 .root {
     display: flex;
     margin: 10px;
-    width: 70%;
 }
-
+.my-projects{
+    margin-top: 50px;
+    margin-left: 30px;
+}
 .details {
     display: flex;
     flex-direction: column;

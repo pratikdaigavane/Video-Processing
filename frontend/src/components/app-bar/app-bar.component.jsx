@@ -3,14 +3,10 @@ import './app-bar.styles.css'
 import {
     AppBar,
     Badge,
-    Divider,
+    CardActions,
     Drawer,
     IconButton,
     InputBase,
-    List,
-    ListItem,
-    ListItemIcon,
-    ListItemText,
     Menu,
     MenuItem,
     Toolbar,
@@ -20,11 +16,12 @@ import SearchIcon from '@material-ui/icons/Search'
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import InboxIcon from '@material-ui/icons/Inbox';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { fade, makeStyles, useTheme } from '@material-ui/core/styles';
+import {fade, makeStyles, useTheme} from '@material-ui/core/styles';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import Button from "@material-ui/core/Button";
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -87,7 +84,6 @@ const AppBarComponent = (props) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
 
-
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -118,19 +114,19 @@ const AppBarComponent = (props) => {
                     aria-label="open drawer"
                     onClick={handleDrawerOpen}
                 >
-                    <MenuIcon />
+                    <MenuIcon/>
                 </IconButton>
             </div>
         )
 
 
-        ;
+    ;
 
     const showAppBar2 = () => (
 
         <div className={classes.search}>
             <div className={classes.searchIcon}>
-                <SearchIcon />
+                <SearchIcon/>
             </div>
             <InputBase
                 placeholder="Search…"
@@ -138,21 +134,17 @@ const AppBarComponent = (props) => {
                     root: classes.inputRoot,
                     input: classes.inputInput,
                 }}
-                inputProps={{ 'aria-label': 'search' }}
+                inputProps={{'aria-label': 'search'}}
             />
+
         </div>
+
     )
     const showAppBar3 = () => (
         <div>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-                <Badge badgeContent={4} color="secondary">
-                    <MailIcon />
-                </Badge>
-            </IconButton>
+
             <IconButton aria-label="show 17 new notifications" color="inherit">
-                <Badge badgeContent={17} color="secondary">
-                    <NotificationsIcon />
-                </Badge>
+                    <NotificationsIcon/>
             </IconButton>
             <IconButton
                 edge="end"
@@ -161,7 +153,7 @@ const AppBarComponent = (props) => {
                 color="inherit"
                 onClick={handleClick}
             >
-                <AccountCircle />
+                <AccountCircle/>
             </IconButton>
         </div>
     )
@@ -174,7 +166,14 @@ const AppBarComponent = (props) => {
                     <Typography className={classes.title} variant="h6" noWrap>
                         Video Processing Application
                     </Typography>
-                    {showAppBar2()}
+                    <Link to={`/doc`
+
+
+                    }
+                          style={{textDecoration: 'none'}}
+                    >
+                    <Button variant="contained" color="primary" disableElevation>API DOCUMENTATION</Button>
+                    </Link>
                     {showAppBar3()}
                 </Toolbar>
             </AppBar>
@@ -200,29 +199,20 @@ const AppBarComponent = (props) => {
             >
                 <div className={classes.drawerHeader}>
                     <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                        {theme.direction === 'ltr' ? <ChevronLeftIcon/> : <ChevronRightIcon/>}
                     </IconButton>
                 </div>
-                <Divider />
-                <List>
-                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
-                </List>
-                <Divider />
-                <List>
-                    {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
-                </List>
-            </Drawer>
-        </div>
-    )
+
+                <Link to={'/'}
+                style={{textDecoration: 'none'}}
+            >
+                <Button onClick={handleDrawerClose}>
+                    Home
+                </Button>
+            </Link>
+
+        </Drawer>
+</div>
+)
 };
 export default AppBarComponent

@@ -4,11 +4,7 @@
     <list default="true" id="a247f26f-f3f9-4315-a625-eb855a2cbb3d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/tasks.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/endpoints/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/endpoints/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/endpoints/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/endpoints/tasks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/endpoints/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/endpoints/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +74,7 @@
       <workItem from="1583211605067" duration="6497000" />
       <workItem from="1584099292375" duration="5299000" />
       <workItem from="1584174844841" duration="11294000" />
-      <workItem from="1584207460488" duration="12557000" />
+      <workItem from="1584207460488" duration="18187000" />
     </task>
     <servers />
   </component>
