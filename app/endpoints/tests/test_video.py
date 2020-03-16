@@ -17,15 +17,15 @@ class VideoListApiTests(TestCase):
         res = self.client.get(LIST_URL)
         self.assertEqual(res.status_code, status.HTTP_200_OK)
 
-    def test_upload_new_video(self):
-        """test which uploads new file"""
-        video = open('/app/endpoints/tests/jellies.mp4', 'rb')
-        subtitle = open('/app/endpoints/tests/jellies.srt', 'rb')
-        project_name = 'Test Project'
-        payload = {
-            'project_name': project_name,
-            'video': video,
-            'subtitle': subtitle
-        }
-        res = self.client.post(LIST_URL, payload)
-        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+    # def test_upload_new_video(self):
+    #     """test which uploads new file"""
+    #     video = open('/app/endpoints/tests/jellies.mp4', 'rb')
+    #     subtitle = open('/app/endpoints/tests/jellies.srt', 'rb')
+    #     project_name = 'Test Project'
+    #     payload = {
+    #         'project_name': project_name,
+    #         'video': video,
+    #         'subtitle': subtitle
+    #     }
+    #     res = self.client.post(LIST_URL, payload)
+    #     self.assertEqual(res.status_code, status.HTTP_201_CREATED)
