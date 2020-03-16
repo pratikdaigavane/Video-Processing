@@ -1,22 +1,10 @@
 import React from 'react'
 import './app-bar.styles.css'
-import {
-    AppBar,
-    Badge,
-    CardActions,
-    Drawer,
-    IconButton,
-    InputBase,
-    Menu,
-    MenuItem,
-    Toolbar,
-    Typography
-} from "@material-ui/core";
+import {AppBar, Drawer, IconButton, InputBase, Menu, MenuItem, Toolbar, Typography} from "@material-ui/core";
 import SearchIcon from '@material-ui/icons/Search'
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import {fade, makeStyles, useTheme} from '@material-ui/core/styles';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -144,7 +132,7 @@ const AppBarComponent = (props) => {
         <div>
 
             <IconButton aria-label="show 17 new notifications" color="inherit">
-                    <NotificationsIcon/>
+                <NotificationsIcon/>
             </IconButton>
             <IconButton
                 edge="end"
@@ -172,7 +160,7 @@ const AppBarComponent = (props) => {
                     }
                           style={{textDecoration: 'none'}}
                     >
-                    <Button variant="contained" color="primary" disableElevation>API DOCUMENTATION</Button>
+                        <Button variant="contained" color="primary" disableElevation>API DOCUMENTATION</Button>
                     </Link>
                     {showAppBar3()}
                 </Toolbar>
@@ -204,15 +192,15 @@ const AppBarComponent = (props) => {
                 </div>
 
                 <Link to={'/'}
-                style={{textDecoration: 'none'}}
-            >
-                <Button onClick={handleDrawerClose}>
-                    Home
-                </Button>
-            </Link>
+                      style={{textDecoration: 'none'}}
+                >
+                    <Button onClick={handleDrawerClose}>
+                        Home
+                    </Button>
+                </Link>
 
-        </Drawer>
-</div>
-)
+            </Drawer>
+        </div>
+    )
 };
 export default AppBarComponent

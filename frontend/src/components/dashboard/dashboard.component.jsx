@@ -147,8 +147,8 @@ class Dashboard extends React.Component {
                                             <Skeleton variant="text"/>
                                             <Skeleton variant="text"/>
                                             <Skeleton variant="text"/>
-                                            <Skeleton width="60%" />
-                                            <Skeleton width="60%" />
+                                            <Skeleton width="60%"/>
+                                            <Skeleton width="60%"/>
 
                                         </div>
                                 }
@@ -168,8 +168,8 @@ class Dashboard extends React.Component {
                                         <Skeleton variant="text"/>
                                         <Skeleton variant="text"/>
                                         <Skeleton variant="text"/>
-                                        <Skeleton width="60%" />
-                                        <Skeleton width="60%" />
+                                        <Skeleton width="60%"/>
+                                        <Skeleton width="60%"/>
                                     </div>
                                 }
                             </Grid>
@@ -225,7 +225,7 @@ class Dashboard extends React.Component {
                                             </Grid>
                                                 <Grid item xs={12} sm={3}>
                                                     <Typography component="h5" variant="h5">
-                                                        Chunk No: {chunk.chunk_no+1}
+                                                        Chunk No: {chunk.chunk_no + 1}
                                                     </Typography>
                                                     <AudioPlayer
                                                         src={chunk.audio_chunk}
