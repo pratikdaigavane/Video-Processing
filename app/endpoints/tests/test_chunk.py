@@ -1,9 +1,9 @@
-from django.test import TestCase
-from django.urls import reverse
-from rest_framework.test import APIClient
-from rest_framework import status
+# from django.test import TestCase
+# from django.urls import reverse
+# from rest_framework.test import APIClient
+# from rest_framework import status
 
-LIST_URL = reverse('video-list')
+# LIST_URL = reverse('video-list')
 
 
 # class VideoChunkApiTests(TestCase):
@@ -25,6 +25,6 @@ LIST_URL = reverse('video-list')
 
 #     def test_get_chunk_list(self):
 #         """Test to get chunk list for particular video"""
-#         chunk_list_url = reverse('chunk-list', kwargs={'pk': self.project_id})
+#         chunk_list_url = reverse('chunk-list',kwargs={'pk': self.project_id})
 #         res = self.client.get(chunk_list_url)
 #         self.assertEqual(res.status_code, status.HTTP_200_OK)
