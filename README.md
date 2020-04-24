@@ -3,7 +3,7 @@
 > Screening task for FOSSEE Summer Fellowship
 >
 [![Build Status](https://travis-ci.com/pratikdaigavane/Video-Processing.svg?token=n9GNM7C4LryMEo4g1p51&branch=master)](https://travis-ci.com/pratikdaigavane/Video-Processing)
-[![Code Factor](https://www.codefactor.io/repository/github/pratikdaigavane/Video-Processing/badge?style=plastic)](https://travis-ci.com/pratikdaigavane/Video-Processing)
+[![Code Factor](https://www.codefactor.io/repository/github/pratikdaigavane/Video-Processing/badge?style=plastic)](https://www.codefactor.io/repository/github/pratikdaigavane/Video-Processing)
 
 
 Django application that allows a user to upload a video and its .srt file containing subtitles. The video is broken into chunks, based on the timing information specified in the .srt file. The corresponding audio is extracted from each video chunk and stored is separately.
