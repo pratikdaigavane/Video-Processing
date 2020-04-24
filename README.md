@@ -8,9 +8,11 @@ Django application that allows a user to upload a video and its .srt file contai
 
 For the uploaded video, the start time, end time, video chunk sequence number, subtitles, and its respective audio (.mp3) are shown. For each audio, there is facility to ‘Upload’, in which a user is allowed to re-upload the edited .mp3 file for that video chunk. The ‘Download tutorial’ button will combine all the video chunks with respective audio chunks into single video (.mp4 file).
 
-![](https://pratikdaigavane.github.io/fosse1.png)
+## Demo Video
+[![FOSSEE Video Processing](https://pratikdaigavane.github.io/fosee2.png)](https://www.youtube.com/watch?v=NMdinGKIyn8 
+"FOSSEE Video Processing")
 
-![](https://pratikdaigavane.github.io/fosee2.png)
+![](https://pratikdaigavane.github.io/fosse1.png)
 
 ## Highlights of the Project
 * PEP-8 Coding guidelines followed
