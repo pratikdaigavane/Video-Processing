@@ -1,6 +1,5 @@
 # Video-Processing
 
-> Screening task for FOSSEE Summer Fellowship
 >
 [![Build Status](https://travis-ci.com/pratikdaigavane/Video-Processing.svg?token=n9GNM7C4LryMEo4g1p51&branch=master)](https://travis-ci.com/pratikdaigavane/Video-Processing)
 [![Code Factor](https://www.codefactor.io/repository/github/pratikdaigavane/Video-Processing/badge?style=flat-square)](https://www.codefactor.io/repository/github/pratikdaigavane/Video-Processing)
