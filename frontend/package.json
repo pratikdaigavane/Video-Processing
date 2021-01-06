@@ -10,7 +10,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "@videojs/themes": "^1.0.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "query-string": "^6.11.1",
     "react": "^16.13.0",
     "react-audio-player": "^0.11.1",
