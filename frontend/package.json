@@ -20,7 +20,7 @@
     "react-h5-audio-player": "^2.4.2",
     "react-router-dom": "^5.1.2",
     "react-router-transition": "^2.0.0",
-    "react-scripts": "3.4.0",
+    "react-scripts": "5.0.1",
     "recharts": "^2.0.0-beta.1",
     "swagger-ui-react": "^3.25.0",
     "typeface-roboto": "0.0.75",
